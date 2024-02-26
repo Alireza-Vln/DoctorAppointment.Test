@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "x6Cj+f2ykiYberSJR/XPXxBSYTqHwTPIauflu4PN6aixllAdQTS1svm25VeKXqA33a49HHgJQfG71YsVWjqeqg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Contracts\\DoctorAppointment.Contracts.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\welldone\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.22\\microsoft.windowsdesktop.app.ref.6.0.22.nupkg.sha512",
+    "C:\\Users\\welldone\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.22\\microsoft.netcore.app.ref.6.0.22.nupkg.sha512",
+    "C:\\Users\\welldone\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.22\\microsoft.aspnetcore.app.ref.6.0.22.nupkg.sha512"
+  ],
+  "logs": []
+}

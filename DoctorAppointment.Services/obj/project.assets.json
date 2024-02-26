@@ -1,0 +1,124 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "DoctorAppointment.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/DoctorAppointment.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DoctorAppointment.Contracts.dll": {}
+        }
+      },
+      "DoctorAppointment.Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/DoctorAppointment.Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DoctorAppointment.Entities.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DoctorAppointment.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../DoctorAppointment.Contracts/DoctorAppointment.Contracts.csproj",
+      "msbuildProject": "../DoctorAppointment.Contracts/DoctorAppointment.Contracts.csproj"
+    },
+    "DoctorAppointment.Entities/1.0.0": {
+      "type": "project",
+      "path": "../DoctorAppointment.Entities/DoctorAppointment.Entities.csproj",
+      "msbuildProject": "../DoctorAppointment.Entities/DoctorAppointment.Entities.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "DoctorAppointment.Contracts >= 1.0.0",
+      "DoctorAppointment.Entities >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\welldone\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Services\\DoctorAppointment.Services.csproj",
+      "projectName": "DoctorAppointment.Services",
+      "projectPath": "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Services\\DoctorAppointment.Services.csproj",
+      "packagesPath": "C:\\Users\\welldone\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Services\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\welldone\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {
+            "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Contracts\\DoctorAppointment.Contracts.csproj": {
+              "projectPath": "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Contracts\\DoctorAppointment.Contracts.csproj"
+            },
+            "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Entities\\DoctorAppointment.Entities.csproj": {
+              "projectPath": "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Entities\\DoctorAppointment.Entities.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.22, 6.0.22]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.22, 6.0.22]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.22, 6.0.22]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
