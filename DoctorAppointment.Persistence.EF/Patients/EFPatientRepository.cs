@@ -14,5 +14,10 @@ namespace DoctorAppointment.Services.Unit.Tests
         {
           await _context.Patients.AddAsync(patient);
         }
+
+        public bool IsExist(string nationCode)
+        {
+            return _context.Patients.Any(_ => _.NationCode == nationCode);
+        }
     }
 }

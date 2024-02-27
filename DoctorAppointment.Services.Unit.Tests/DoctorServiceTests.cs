@@ -48,7 +48,8 @@ public class DoctorServiceTests
     {
         var db = new EFInMemoryDatabase();
         var context = db.CreateDataContext<EFDataContext>();
-        
+
+
         var docter = new Doctor
         {
             FirstName = "dummy-first-name",

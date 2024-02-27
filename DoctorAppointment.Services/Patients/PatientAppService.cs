@@ -14,6 +14,10 @@ namespace DoctorAppointment.Services.Unit.Tests
 
         public async Task Add(AddPatientDto dto)
         {
+            if (_repsitory.IsExist(dto.NationCode))
+            {
+                throw new AddThrowExeptionPatientProperlyThereisanationalcodepatient();
+            }
             var patient = new Patient()
             {
                 FirstName = dto.FirstName,
@@ -21,6 +25,7 @@ namespace DoctorAppointment.Services.Unit.Tests
                 PhonNumber = dto.PhonNumber,
                 NationCode = dto.NationCode
             };
+           
             await _repsitory.Add(patient);
             await _unitOfWork.Complete();
         }

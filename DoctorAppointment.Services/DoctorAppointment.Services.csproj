@@ -11,8 +11,4 @@
       <ProjectReference Include="..\DoctorAppointment.Entities\DoctorAppointment.Entities.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Patients\Exceptions\" />
-    </ItemGroup>
-
 </Project>
