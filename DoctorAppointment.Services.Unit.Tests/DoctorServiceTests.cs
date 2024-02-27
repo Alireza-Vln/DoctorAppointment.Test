@@ -185,12 +185,86 @@ public class DoctorServiceTests
        var sut=new DoctorAppService(new EFDoctorRepository(context),new EFUnitOfWork(context));
 
 
-    var action=()=>sut.Remove(dummyDocterId);
+           var action=()=>sut.Remove(dummyDocterId);
 
 
 
        await action.Should().ThrowExactlyAsync<RemoveThrowDoctorProperlyIfDocterIsIdNull>();
 
+        
+    }
+
+    [Fact]
+   public async Task Get_gets_all_for_correct_data_docter_properly()
+    {
+        var db=new EFInMemoryDatabase();
+        var context= db.CreateDataContext<EFDataContext>();
+        var readcontext= db.CreateDataContext<EFDataContext>();
+        var doctor = new Doctor()
+        {
+            Id = 1,
+            FirstName = "get-dummy-first-name",
+            LastName = "get-dummy-last-name",
+            Field = "haert",
+            NationCode = "22",
+        };
+        context.Save(doctor);
+ 
+        var sut=new DoctorAppService(new EFDoctorRepository(context), new EFUnitOfWork(context));
+
+        var dto = new GetDocterDto()
+        {
+            Id = 1,
+            FirstName = "get-dummy-first-name",
+            LastName = "get-dummy-last-name",
+            Field = "haert",
+            NationCode = "22",
+
+        };
+        await sut.GetAll();
+
+
+        var actual=readcontext.Doctors.Single();
+        actual.Id.Should().Be(dto.Id);
+        actual.FirstName.Should().Be(dto.FirstName);
+        actual.LastName.Should().Be(dto.LastName);
+        actual.Field.Should().Be(dto.Field);
+        actual.NationCode.Should().Be(dto.NationCode);
 
     }
+    [Fact]
+    public async Task Get_gets_all_for_count_data_docter_properly()
+    {
+        var db = new EFInMemoryDatabase();
+        var context = db.CreateDataContext<EFDataContext>();
+        var readcontext = db.CreateDataContext<EFDataContext>();
+        var doctor = new Doctor()
+        {
+            Id = 1,
+            FirstName = "get-dummy-first-name",
+            LastName = "get-dummy-last-name",
+            Field = "haert",
+            NationCode = "22",
+        };
+        context.Save(doctor);
+
+        var sut = new DoctorAppService(new EFDoctorRepository(context), new EFUnitOfWork(context));
+
+        var dto = new GetDocterDto()
+        {
+            Id = 1,
+            FirstName = "get-dummy-first-name",
+            LastName = "get-dummy-last-name",
+            Field = "haert",
+            NationCode = "22",
+
+        };
+        await sut.GetAll();
+
+
+      var actual = readcontext.Doctors.ToList();
+      actual.Count.Should().Be(1);  
+
+    }
+
 }

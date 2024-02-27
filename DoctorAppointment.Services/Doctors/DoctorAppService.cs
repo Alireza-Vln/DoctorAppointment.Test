@@ -41,6 +41,11 @@ public class DoctorAppService : DoctorService
         await _unitOfWork.Complete();
     }
 
+    public async Task<List<Doctor>> GetAll()
+    {
+        return await _repository.GetAll();
+    }
+
     public async Task Remove(int id)
     {
        var docter= await _repository.FindById(id);

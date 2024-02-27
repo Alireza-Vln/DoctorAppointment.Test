@@ -24,6 +24,16 @@ public class EFDoctorRepository : DoctorRepository
         return await _context.Doctors.FirstOrDefaultAsync(_ => _.Id == id);
     }
 
+    public Task GetAll(Doctor doctor)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<List<Doctor>> GetAll()
+    {
+      return _context.Doctors.ToList();
+    }
+
     public bool IsExist(string nationCode)
     {
        return _context.Doctors.Any(_=>_.NationCode == nationCode);
