@@ -34,6 +34,11 @@ public class EFDoctorRepository : DoctorRepository
       return _context.Doctors.ToList();
     }
 
+    public async Task<int> GetAllCount()
+    {
+       return await _context.Doctors.CountAsync();
+    }
+
     public bool IsExist(string nationCode)
     {
        return _context.Doctors.Any(_=>_.NationCode == nationCode);

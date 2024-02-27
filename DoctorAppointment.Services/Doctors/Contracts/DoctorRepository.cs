@@ -8,6 +8,7 @@ public interface DoctorRepository
     Task<Doctor?> FindById(int id);
     Task GetAll(Doctor doctor);
     Task<List<Doctor>> GetAll();
+    Task<int> GetAllCount();
     bool IsExist(string nationCode);
     void Remove(Doctor doctor);
 }

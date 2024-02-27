@@ -12,6 +12,7 @@ public class EFInMemoryDatabase : IDisposable
     {
         _connection = new SqliteConnection("filename=:memory:");
         _connection.Open();
+       
     }
 
     public void Dispose()
@@ -122,7 +123,7 @@ public class EFInMemoryDatabase : IDisposable
         where TDbContext : DbContext
     {
         var dbContext = ResolveFactory<TDbContext>().Invoke();
-        dbContext.Database.EnsureCreated();
+        dbContext.Database.EnsureCreated();  
         
         return dbContext;
     }

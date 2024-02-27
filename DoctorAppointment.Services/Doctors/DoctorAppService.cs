@@ -44,6 +44,12 @@ public class DoctorAppService : DoctorService
     public async Task<List<Doctor>> GetAll()
     {
         return await _repository.GetAll();
+
+    }
+
+    public async Task<int> GetAllCount()
+    {
+       return await _repository.GetAllCount();  
     }
 
     public async Task Remove(int id)
