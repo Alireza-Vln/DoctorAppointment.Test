@@ -1,4 +1,5 @@
 ﻿using DoctorAppointment.Persistence.EF;
+using Microsoft.EntityFrameworkCore;
 
 namespace DoctorAppointment.Services.Unit.Tests
 {
@@ -13,6 +14,11 @@ namespace DoctorAppointment.Services.Unit.Tests
         public async Task Add(Patient patient)
         {
           await _context.Patients.AddAsync(patient);
+        }
+
+        public async Task<Patient?> FindById(int id)
+        {
+           return await _context.Patients.FirstOrDefaultAsync(_ => _.Id == id);
         }
 
         public bool IsExist(string nationCode)

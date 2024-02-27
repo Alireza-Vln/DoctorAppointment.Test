@@ -16,7 +16,7 @@ namespace DoctorAppointment.Services.Unit.Tests
         {
             if (_repsitory.IsExist(dto.NationCode))
             {
-                throw new AddThrowExeptionPatientProperlyThereisanationalcodepatient();
+                throw new AddThrowExceptionPatientProperlyThereisanationalcodepatient();
             }
             var patient = new Patient()
             {
@@ -28,6 +28,26 @@ namespace DoctorAppointment.Services.Unit.Tests
            
             await _repsitory.Add(patient);
             await _unitOfWork.Complete();
+        }
+
+        public async Task Update(int id, UpdatePatientDto dto)
+        {
+          var patient= await _repsitory.FindById(id);
+            if (patient==null)
+            {
+
+               throw new UpdateThrowExceptionPatientProperlyIfPatientIsIdNull();
+            
+            }
+
+            patient.FirstName = dto.FirstName;
+            patient.LastName = dto.LastName;
+            patient.PhonNumber = dto.PhonNumber;
+            patient.NationCode = dto.NationCode;
+
+            await _unitOfWork.Complete();
+
+        
         }
     }
 }

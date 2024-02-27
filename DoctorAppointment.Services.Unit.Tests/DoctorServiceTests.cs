@@ -79,8 +79,6 @@ public class DoctorServiceTests
     }
 
 
-
-
     [Fact]
     public async Task Update_updates_doctor_properly()
     {
@@ -102,7 +100,7 @@ public class DoctorServiceTests
             FirstName = "updated-dummy-first-name",
             LastName = "updated-dummy-last-name",
             Field = "child",
-            NationCode = "22",
+            NationCode = "updated-22",
 
         };
         
@@ -118,7 +116,7 @@ public class DoctorServiceTests
     }
 
     [Fact]
-    public async Task Update_throw_doctor_properly_if_docter_is_id_null()
+    public async Task Update_throw_doctor_properly_if_doctor_is_id_null()
     {
 
 
@@ -144,7 +142,7 @@ public class DoctorServiceTests
 
         //assert
 
-        await action.Should().ThrowExactlyAsync<UpdateThrowoctorProperlyIfDocterIsIdNull>();
+        await action.Should().ThrowExactlyAsync<UpdateThrowdoctorProperlyIfDocterIsIdNull>();
 
     }
     [Fact]

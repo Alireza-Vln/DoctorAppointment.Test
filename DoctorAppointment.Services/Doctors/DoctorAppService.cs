@@ -69,11 +69,12 @@ public class DoctorAppService : DoctorService
         var doctor = await _repository.FindById(id);
         if (doctor == null)
         {
-            throw new UpdateThrowoctorProperlyIfDocterIsIdNull();
+            throw new UpdateThrowdoctorProperlyIfDocterIsIdNull();
         }
         doctor.FirstName = dto.FirstName;
         doctor.LastName = dto.LastName;
         doctor.Field = dto.Field;
+        doctor.NationCode = dto.NationCode;
 
         await _unitOfWork.Complete();
     }

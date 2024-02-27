@@ -8,7 +8,8 @@ public class EFDataContext : DbContext
 {
     public EFDataContext(string connectionString) :
         this(new DbContextOptionsBuilder().UseSqlServer(connectionString).Options)
-    { }
+    {
+    }
 
      
     public EFDataContext(DbContextOptions options) : base(options)

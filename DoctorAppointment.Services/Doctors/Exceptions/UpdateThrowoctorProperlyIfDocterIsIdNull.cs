@@ -3,7 +3,7 @@
 namespace DoctorAppointment.Services.Doctors.Exceptions
 {
    
-    public class UpdateThrowoctorProperlyIfDocterIsIdNull : Exception
+    public class UpdateThrowdoctorProperlyIfDocterIsIdNull : Exception
     {
        
     }
