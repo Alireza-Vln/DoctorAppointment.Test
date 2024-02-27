@@ -40,6 +40,7 @@ public class DoctorServiceTests
         actual.FirstName.Should().Be(dto.FirstName);
         actual.LastName.Should().Be(dto.LastName);
         actual.Field.Should().Be(dto.Field);
+        actual.NationCode.Should().Be(dto.NationCode);
     }
 
     [Fact]
@@ -112,6 +113,7 @@ public class DoctorServiceTests
         actual.FirstName.Should().Be(updateDto.FirstName);
         actual.LastName.Should().Be(updateDto.LastName);
         actual.Field.Should().Be(updateDto.Field);
+        actual.NationCode.Should().Be(updateDto.NationCode);
     }
 
     [Fact]
