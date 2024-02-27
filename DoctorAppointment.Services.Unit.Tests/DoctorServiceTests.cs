@@ -8,6 +8,7 @@ using DoctorAppointment.Services.Doctors.Contracts.Dto;
 using DoctorAppointment.Services.Doctors.Exceptions;
 using DoctorAppointment.Test.Tools.Infrastructure.DatabaseConfig.Unit;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Utilities;
 using System.Numerics;
 
@@ -23,7 +24,8 @@ public class DoctorServiceTests
         {
             FirstName = "dummy-first-name",
             LastName = "dummy-last-name",
-            Field = "heart"
+            Field = "heart",
+            NationCode = "22",
         };
         var db = new EFInMemoryDatabase();
         var context = db.CreateDataContext<EFDataContext>();
@@ -41,6 +43,43 @@ public class DoctorServiceTests
     }
 
     [Fact]
+    public async Task Add_throw_doctor_properly_There_is_a_national_doctor_code()
+    {
+        var db = new EFInMemoryDatabase();
+        var context = db.CreateDataContext<EFDataContext>();
+        
+        var docter = new Doctor
+        {
+            FirstName = "dummy-first-name",
+            LastName = "dummy-last-name",
+            Field = "heart",
+            NationCode = "22",
+        };
+        context.Save(docter);
+        var sut = new DoctorAppService(new EFDoctorRepository(context), new EFUnitOfWork(context));
+        var dto = new AddDoctorDto
+        {
+            FirstName = "dummy2-first-name",
+            LastName = "dummy2-last-name",
+            Field = "heart",
+            NationCode = "22",
+        };
+
+
+
+       var action =()=>sut.Add(dto);
+
+       
+
+        await action.Should().ThrowExactlyAsync<AddThrowDoctorProperlyThereIsANationalCodeDoctor>();
+
+        
+    }
+
+
+
+
+    [Fact]
     public async Task Update_updates_doctor_properly()
     {
         var db = new EFInMemoryDatabase();
@@ -51,7 +90,8 @@ public class DoctorServiceTests
         {
             FirstName = "dummy-first-name",
             LastName = "dummy-last-name",
-            Field = "heart"
+            Field = "heart",
+            NationCode="22",
         };
         context.Save(doctor);
         var sut = new DoctorAppService(new EFDoctorRepository(context), new EFUnitOfWork(context));
@@ -59,7 +99,9 @@ public class DoctorServiceTests
         {
             FirstName = "updated-dummy-first-name",
             LastName = "updated-dummy-last-name",
-            Field = "child"
+            Field = "child",
+            NationCode = "22",
+
         };
         
         //act
@@ -71,6 +113,7 @@ public class DoctorServiceTests
         actual.LastName.Should().Be(updateDto.LastName);
         actual.Field.Should().Be(updateDto.Field);
     }
+
     [Fact]
     public async Task Update_throw_doctor_properly_if_docter_is_id_null()
     {
@@ -78,7 +121,7 @@ public class DoctorServiceTests
 
         var db = new EFInMemoryDatabase();
         var context = db.CreateDataContext<EFDataContext>();
-        var readContext = db.CreateDataContext<EFDataContext>();
+     
         //arrange
 
         var dummyid = 1;
@@ -87,11 +130,13 @@ public class DoctorServiceTests
         {
             FirstName = "updated-dummy-first-name",
             LastName = "updated-dummy-last-name",
-            Field = "child"
+            Field = "child",
+            NationCode="22",
+            
         };
 
         //act
-      var action = ()=>   sut.Update(dummyid, updateDto);
+      var action = ()=> sut.Update(dummyid, updateDto);
 
 
         //assert
@@ -99,14 +144,53 @@ public class DoctorServiceTests
         await action.Should().ThrowExactlyAsync<UpdateThrowoctorProperlyIfDocterIsIdNull>();
 
     }
+    [Fact]
+    public async Task Remove_removes_doctor_properly()
+    {
+        var db=new EFInMemoryDatabase();
+        var context=db.CreateDataContext<EFDataContext>();
+        var readContext=db.CreateDataContext<EFDataContext>();
+        var docter = new Doctor()
+        {
+            FirstName = "dummy-first-name",
+            LastName = "dummy-last-name",
+            Field = "heart",
+            NationCode = "22",
+        };
+        context.Save(docter);
+        var sut=new DoctorAppService(new EFDoctorRepository(context), new EFUnitOfWork(context));
+
+        
+        await sut.Remove(docter.Id);
+
+
+        var actual = readContext.Doctors.FirstOrDefaultAsync(_ => _.Id == docter.Id);
+        actual.Result.Should().BeNull();    
+
+    }
+    [Fact]
+    public async Task Remove_throw_doctor_properly_if_docter_is_id_null()
+    {
+        var db=new EFInMemoryDatabase();
+        var context=db.CreateDataContext<EFDataContext>();
+        var readContext = db.CreateDataContext<EFDataContext>();
+        var dummyDocterId = 1;
+        var docter = new Doctor()
+        {
+            FirstName = "dummy-first-name",
+            LastName = "dummy-last-name",
+            Field = "heart",
+            NationCode = "22",
+        };
+       var sut=new DoctorAppService(new EFDoctorRepository(context),new EFUnitOfWork(context));
+
+
+    var action=()=>sut.Remove(dummyDocterId);
+
+
+
+       await action.Should().ThrowExactlyAsync<RemoveThrowDoctorProperlyIfDocterIsIdNull>();
+
+
+    }
 }
-
-
-
-
-
-
-
-
-
-

@@ -1202,19 +1202,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\amirv\\.nuget\\packages\\": {}
+    "C:\\Users\\welldone\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\amirv\\OneDrive\\Desktop\\Alireza Code\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Test.Tools\\DoctorAppointment.Test.Tools.csproj",
+      "projectUniqueName": "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Test.Tools\\DoctorAppointment.Test.Tools.csproj",
       "projectName": "DoctorAppointment.Test.Tools",
-      "projectPath": "C:\\Users\\amirv\\OneDrive\\Desktop\\Alireza Code\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Test.Tools\\DoctorAppointment.Test.Tools.csproj",
-      "packagesPath": "C:\\Users\\amirv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\amirv\\OneDrive\\Desktop\\Alireza Code\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Test.Tools\\obj\\",
+      "projectPath": "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Test.Tools\\DoctorAppointment.Test.Tools.csproj",
+      "packagesPath": "C:\\Users\\welldone\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Test.Tools\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\amirv\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\welldone\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1260,12 +1260,26 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.22, 6.0.22]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.22, 6.0.22]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.22, 6.0.22]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

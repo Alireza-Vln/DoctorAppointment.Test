@@ -3,6 +3,7 @@ using DoctorAppointment.Entities.Doctors;
 using DoctorAppointment.Services.Doctors.Contracts;
 using DoctorAppointment.Services.Doctors.Contracts.Dto;
 using DoctorAppointment.Services.Doctors.Exceptions;
+using DoctorAppointment.Services.Unit.Tests;
 
 namespace DoctorAppointment.Services.Doctors;
 
@@ -21,14 +22,34 @@ public class DoctorAppService : DoctorService
 
     public async Task Add(AddDoctorDto dto)
     {
+        if (_repository.IsExist(dto.NationCode))
+        {
+            throw new AddThrowDoctorProperlyThereIsANationalCodeDoctor();
+        }
+
         var doctor = new Doctor()
         {
             FirstName = dto.FirstName,
             LastName = dto.LastName,
-            Field = dto.Field
+            Field = dto.Field,
+            NationCode = dto.NationCode,
+            
         };
 
+
         _repository.Add(doctor);
+        await _unitOfWork.Complete();
+    }
+
+    public async Task Remove(int id)
+    {
+       var docter= await _repository.FindById(id);
+        if(docter == null)
+        {
+        throw new RemoveThrowDoctorProperlyIfDocterIsIdNull();
+        
+        }
+        _repository.Remove(docter);
         await _unitOfWork.Complete();
     }
 

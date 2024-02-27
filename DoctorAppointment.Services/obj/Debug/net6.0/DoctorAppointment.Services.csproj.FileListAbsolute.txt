@@ -32,3 +32,20 @@ C:\Users\amirv\OneDrive\Desktop\Alireza Code\Docter.Test\DoctorAppointment\Docto
 C:\Users\amirv\OneDrive\Desktop\Alireza Code\Docter.Test\DoctorAppointment\DoctorAppointment.Services\obj\Debug\net6.0\refint\DoctorAppointment.Services.dll
 C:\Users\amirv\OneDrive\Desktop\Alireza Code\Docter.Test\DoctorAppointment\DoctorAppointment.Services\obj\Debug\net6.0\DoctorAppointment.Services.pdb
 C:\Users\amirv\OneDrive\Desktop\Alireza Code\Docter.Test\DoctorAppointment\DoctorAppointment.Services\obj\Debug\net6.0\ref\DoctorAppointment.Services.dll
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\bin\Debug\net6.0\DoctorAppointment.Services.deps.json
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\bin\Debug\net6.0\DoctorAppointment.Services.dll
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\bin\Debug\net6.0\DoctorAppointment.Services.pdb
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\bin\Debug\net6.0\DoctorAppointment.Contracts.dll
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\bin\Debug\net6.0\DoctorAppointment.Entities.dll
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\bin\Debug\net6.0\DoctorAppointment.Contracts.pdb
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\bin\Debug\net6.0\DoctorAppointment.Entities.pdb
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\obj\Debug\net6.0\DoctorAppointment.Services.csproj.AssemblyReference.cache
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\obj\Debug\net6.0\DoctorAppointment.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\obj\Debug\net6.0\DoctorAppointment.Services.AssemblyInfoInputs.cache
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\obj\Debug\net6.0\DoctorAppointment.Services.AssemblyInfo.cs
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\obj\Debug\net6.0\DoctorAppointment.Services.csproj.CoreCompileInputs.cache
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\obj\Debug\net6.0\DoctorAppointment.Services.csproj.CopyComplete
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\obj\Debug\net6.0\DoctorAppointment.Services.dll
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\obj\Debug\net6.0\refint\DoctorAppointment.Services.dll
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\obj\Debug\net6.0\DoctorAppointment.Services.pdb
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Services\obj\Debug\net6.0\ref\DoctorAppointment.Services.dll

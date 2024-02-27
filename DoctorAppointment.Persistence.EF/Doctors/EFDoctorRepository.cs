@@ -23,4 +23,14 @@ public class EFDoctorRepository : DoctorRepository
     {
         return await _context.Doctors.FirstOrDefaultAsync(_ => _.Id == id);
     }
+
+    public bool IsExist(string nationCode)
+    {
+       return _context.Doctors.Any(_=>_.NationCode == nationCode);
+    }
+
+    public void Remove(Doctor doctor)
+    {
+        _context.Doctors.Remove(doctor);
+    }
 }
