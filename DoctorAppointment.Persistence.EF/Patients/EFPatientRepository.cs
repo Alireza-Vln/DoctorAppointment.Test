@@ -21,9 +21,19 @@ namespace DoctorAppointment.Services.Unit.Tests
            return await _context.Patients.FirstOrDefaultAsync(_ => _.Id == id);
         }
 
+        public async Task<List<Patient>> GetAll()
+        {
+           return  _context.Patients.ToList();
+        }
+
         public bool IsExist(string nationCode)
         {
             return _context.Patients.Any(_ => _.NationCode == nationCode);
+        }
+
+        public void Remove(Patient patient)
+        {
+             _context.Patients.Remove(patient);
         }
     }
 }

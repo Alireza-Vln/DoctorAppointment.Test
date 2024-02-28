@@ -17,7 +17,7 @@ namespace DoctorAppointment.Persistance.EF.Patients
             builder.Property(_ => _.Id).ValueGeneratedOnAdd();
             builder.Property(_ => _.FirstName).IsRequired();
             builder.Property(_ => _.LastName).IsRequired();
-            builder.Property(_ => _.PhonNumber).IsRequired();
+            builder.Property(_ => _.PhoneNumber).IsRequired();
             builder.Property(_ => _.NationCode).IsRequired();
         }
     }

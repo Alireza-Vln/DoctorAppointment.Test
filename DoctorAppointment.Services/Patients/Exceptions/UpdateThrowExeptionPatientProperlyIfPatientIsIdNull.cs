@@ -1,6 +1,6 @@
 ﻿namespace DoctorAppointment.Services.Unit.Tests
 {
-    public class UpdateThrowExceptionPatientProperlyIfPatientIsIdNull :Exception
+    public class ThrowExceptionPatientProperlyIfPatientIsIdNull :Exception
     {
     }
 }

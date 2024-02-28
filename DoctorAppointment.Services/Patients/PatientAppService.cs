@@ -22,11 +22,28 @@ namespace DoctorAppointment.Services.Unit.Tests
             {
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
-                PhonNumber = dto.PhonNumber,
+                PhoneNumber = dto.PhonNumber,
                 NationCode = dto.NationCode
             };
            
             await _repsitory.Add(patient);
+            await _unitOfWork.Complete();
+        }
+
+        public async Task<List<Patient>> GetAll()
+        {
+            return await _repsitory.GetAll();
+        }
+
+        public async Task Remove(int id)
+        {
+            var patient=await _repsitory.FindById(id);
+            if (patient == null)
+            {
+                throw new ThrowExceptionPatientProperlyIfPatientIsIdNull();
+            }
+
+            _repsitory.Remove(patient);
             await _unitOfWork.Complete();
         }
 
@@ -36,13 +53,13 @@ namespace DoctorAppointment.Services.Unit.Tests
             if (patient==null)
             {
 
-               throw new UpdateThrowExceptionPatientProperlyIfPatientIsIdNull();
+               throw new ThrowExceptionPatientProperlyIfPatientIsIdNull();
             
             }
 
             patient.FirstName = dto.FirstName;
             patient.LastName = dto.LastName;
-            patient.PhonNumber = dto.PhonNumber;
+            patient.PhoneNumber = dto.PhonNumber;
             patient.NationCode = dto.NationCode;
 
             await _unitOfWork.Complete();
