@@ -8,6 +8,8 @@ using DoctorAppointment.Services.Doctors.Contracts;
 using DoctorAppointment.Services.Doctors.Contracts.Dto;
 using DoctorAppointment.Services.Doctors.Exceptions;
 using DoctorAppointment.Test.Tools.Doctors;
+using DoctorAppointment.Test.Tools.Doctors.Builders;
+using DoctorAppointment.Test.Tools.Doctors.factories;
 using DoctorAppointment.Test.Tools.Infrastructure.DatabaseConfig.Unit;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
@@ -50,11 +52,11 @@ public class DoctorServiceTests
     {
        
 
-        var docter = new DoctorBuilder().Build();
+        var doctor = new DoctorBuilder().Build();
      
-        _context.Save(docter);
+        _context.Save(doctor);
 
-        var dto = AddDoctorDtoFactory.Create();
+        var dto = AddDoctorDtoFactory.Create(doctor.NationCode);
 
 
        var action =()=>_sut.Add(dto);
@@ -70,33 +72,18 @@ public class DoctorServiceTests
     [Fact]
     public async Task Update_updates_doctor_properly()
     {
-        var db = new EFInMemoryDatabase();
-        var context = db.CreateDataContext<EFDataContext>();
-        var readContext = db.CreateDataContext<EFDataContext>();
-        //arrange
-        var doctor = new Doctor
-        {
-            FirstName = "dummy-first-name",
-            LastName = "dummy-last-name",
-            Field = "heart",
-            NationCode="22",
-        };
-        context.Save(doctor);
-        var sut = new DoctorAppService(new EFDoctorRepository(context), new EFUnitOfWork(context));
-        var updateDto = new UpdateDoctorDto
-        {
-            FirstName = "updated-dummy-first-name",
-            LastName = "updated-dummy-last-name",
-            Field = "child",
-            NationCode = "updated-22",
 
-        };
+        var doctor = new DoctorBuilder().Build();
+        _context.Save(doctor);
+
+        var updateDto = UpdateDoctorDtoFactory.Creat();
+   
         
-        //act
-        await sut.Update(doctor.Id, updateDto);
+      
+        await _sut.Update(doctor.Id, updateDto);
         
-        //assert
-        var actual = readContext.Doctors.First(_=>_.Id == doctor.Id);
+  
+        var actual = _readContext.Doctors.First(_=>_.Id == doctor.Id);
         actual.FirstName.Should().Be(updateDto.FirstName);
         actual.LastName.Should().Be(updateDto.LastName);
         actual.Field.Should().Be(updateDto.Field);
@@ -108,27 +95,13 @@ public class DoctorServiceTests
     {
 
 
-        var db = new EFInMemoryDatabase();
-        var context = db.CreateDataContext<EFDataContext>();
-     
-        //arrange
-
         var dummyid = 1;
-        var sut = new DoctorAppService(new EFDoctorRepository(context), new EFUnitOfWork(context));
-        var updateDto = new UpdateDoctorDto
-        {
-            FirstName = "updated-dummy-first-name",
-            LastName = "updated-dummy-last-name",
-            Field = "child",
-            NationCode="22",
-            
-        };
+        var updateDto = UpdateDoctorDtoFactory.Creat();
 
-        //act
-      var action = ()=> sut.Update(dummyid, updateDto);
+     
+      var action = ()=> _sut.Update(dummyid, updateDto);
 
-
-        //assert
+  
 
         await action.Should().ThrowExactlyAsync<UpdateThrowdoctorProperlyIfDocterIsIdNull>();
 
@@ -136,45 +109,29 @@ public class DoctorServiceTests
     [Fact]
     public async Task Remove_removes_doctor_properly()
     {
-        var db=new EFInMemoryDatabase();
-        var context=db.CreateDataContext<EFDataContext>();
-        var readContext=db.CreateDataContext<EFDataContext>();
-        var docter = new Doctor()
-        {
-            FirstName = "dummy-first-name",
-            LastName = "dummy-last-name",
-            Field = "heart",
-            NationCode = "22",
-        };
-        context.Save(docter);
-        var sut=new DoctorAppService(new EFDoctorRepository(context), new EFUnitOfWork(context));
 
+        var doctor = new DoctorBuilder().Build();
+
+        _context.Save(doctor);
+       
         
-        await sut.Remove(docter.Id);
+        await _sut.Remove(doctor.Id);
 
 
-        var actual = readContext.Doctors.FirstOrDefaultAsync(_ => _.Id == docter.Id);
-        actual.Result.Should().BeNull();    
+        var actual = await _readContext.Doctors.FirstOrDefaultAsync(_ => _.Id == doctor.Id);
+        actual.Should().BeNull();    
 
     }
     [Fact]
     public async Task Remove_throw_doctor_properly_if_docter_is_id_null()
     {
-        var db=new EFInMemoryDatabase();
-        var context=db.CreateDataContext<EFDataContext>();
-        var readContext = db.CreateDataContext<EFDataContext>();
-        var dummyDocterId = 1;
-        var docter = new Doctor()
-        {
-            FirstName = "dummy-first-name",
-            LastName = "dummy-last-name",
-            Field = "heart",
-            NationCode = "22",
-        };
-       var sut=new DoctorAppService(new EFDoctorRepository(context),new EFUnitOfWork(context));
+   
+        var dummyDoctorId = 1;
+        var doctor = new DoctorBuilder().Build();
+     
+      
 
-
-           var action=()=>sut.Remove(dummyDocterId);
+           var action=()=>_sut.Remove(dummyDoctorId);
 
 
 
@@ -184,36 +141,20 @@ public class DoctorServiceTests
     }
 
     [Fact]
-   public async Task Get_gets_all_for_correct_data_docter_properly()
+   public async Task Get_gets_all_for_correct_data_doctor_properly()
     {
-        var db=new EFInMemoryDatabase();
-        var context= db.CreateDataContext<EFDataContext>();
-        var readcontext= db.CreateDataContext<EFDataContext>();
-        var doctor = new Doctor()
-        {
-            Id = 1,
-            FirstName = "get-dummy-first-name",
-            LastName = "get-dummy-last-name",
-            Field = "haert",
-            NationCode = "22",
-        };
-        context.Save(doctor);
+       var doctor=new DoctorBuilder().Build();
+        _context.Save(doctor);
  
-        var sut=new DoctorAppService(new EFDoctorRepository(context), new EFUnitOfWork(context));
+        
 
-        var dto = new GetDocterDto()
-        {
-            Id = 1,
-            FirstName = "get-dummy-first-name",
-            LastName = "get-dummy-last-name",
-            Field = "haert",
-            NationCode = "22",
+        var dto = GetDoctorDtoFactory.Create();
+  
 
-        };
-        await sut.GetAll();
+        await _sut.GetAll();
 
 
-        var actual=readcontext.Doctors.Single();
+        var actual=_readContext.Doctors.Single();
         actual.Id.Should().Be(dto.Id);
         actual.FirstName.Should().Be(dto.FirstName);
         actual.LastName.Should().Be(dto.LastName);
@@ -224,34 +165,17 @@ public class DoctorServiceTests
     [Fact]
     public async Task Get_gets_all_for_count_data_docter_properly()
     {
-        var db = new EFInMemoryDatabase();
-        var context = db.CreateDataContext<EFDataContext>();
-        var readcontext = db.CreateDataContext<EFDataContext>();
-        var doctor = new Doctor()
-        {
-            Id = 1,
-            FirstName = "get-dummy-first-name",
-            LastName = "get-dummy-last-name",
-            Field = "haert",
-            NationCode = "22",
-        };
-        context.Save(doctor);
+        var doctor = new DoctorBuilder().Build();
 
-        var sut = new DoctorAppService(new EFDoctorRepository(context), new EFUnitOfWork(context));
-
-        var dto = new GetDocterDto()
-        {
-            Id = 1,
-            FirstName = "get-dummy-first-name",
-            LastName = "get-dummy-last-name",
-            Field = "haert",
-            NationCode = "22",
-
-        };
-        await sut.GetAll();
+       _context.Save(doctor);
 
 
-      var actual = readcontext.Doctors.ToList();
+
+        var dto = GetDoctorDtoFactory.Create();
+        await _sut.GetAll();
+
+
+      var actual = _readContext.Doctors.ToList();
       actual.Count.Should().Be(1);  
 
     }

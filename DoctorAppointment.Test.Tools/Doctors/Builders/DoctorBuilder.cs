@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DoctorAppointment.Test.Tools.Doctors
+namespace DoctorAppointment.Test.Tools.Doctors.Builders
 {
     public class DoctorBuilder
     {
@@ -40,7 +40,7 @@ namespace DoctorAppointment.Test.Tools.Doctors
         {
 
 
-            _doctor.Field= field;
+            _doctor.Field = field;
             return this;
         }
         public DoctorBuilder WithNationCode(string nationCode)

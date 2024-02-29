@@ -4,12 +4,12 @@ using DoctorAppointment.Persistence.EF;
 using DoctorAppointment.Services.Doctors;
 using DoctorAppointment.Services.Doctors.Contracts;
 
-namespace DoctorAppointment.Test.Tools.Doctors
+namespace DoctorAppointment.Test.Tools.Doctors.factories
 {
     public static class DoctorServiceFactory
     {
         public static DoctorService Create(EFDataContext context)
-        { 
+        {
 
             return new DoctorAppService(new EFDoctorRepository(context), new EFUnitOfWork(context));
         }

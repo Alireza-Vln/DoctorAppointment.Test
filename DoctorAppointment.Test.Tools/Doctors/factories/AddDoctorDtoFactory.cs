@@ -5,18 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DoctorAppointment.Test.Tools.Doctors
+namespace DoctorAppointment.Test.Tools.Doctors.factories
 {
     public static class AddDoctorDtoFactory
     {
-        public static AddDoctorDto Create()
+        public static AddDoctorDto Create(string? nationCode = null)
         {
             return new AddDoctorDto()
             {
                 FirstName = "dummy-first-name",
                 LastName = "dummy-last-name",
                 Field = "heart",
-                NationCode = "22",
+                NationCode = nationCode ?? "22",
             };
         }
     }
