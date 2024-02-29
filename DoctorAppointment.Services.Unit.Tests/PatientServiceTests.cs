@@ -6,6 +6,8 @@ using DoctorAppointment.Persistence.EF;
 using DoctorAppointment.Services.Doctors;
 using DoctorAppointment.Services.Doctors.Exceptions;
 using DoctorAppointment.Test.Tools.Infrastructure.DatabaseConfig.Unit;
+using DoctorAppointment.Test.Tools.Patients.Builders;
+using DoctorAppointment.Test.Tools.Patients.Factories;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,27 +21,26 @@ namespace DoctorAppointment.Services.Unit.Tests
 {
     public class PatientServiceTests
     {
+        private readonly PatientService _sut;
+        private readonly EFDataContext _context;
+        private readonly EFDataContext _readContext;
 
+        public PatientServiceTests()
+        {
+            var db = new EFInMemoryDatabase();
+            _context = db.CreateDataContext<EFDataContext>();
+            _readContext = db.CreateDataContext<EFDataContext>();
+            _sut = PatientServiceFactory.Create(_context);
+        }
 
         [Fact]
         public async Task Add_adds_a_new_patient_properly()
         {
-            var db = new EFInMemoryDatabase();
-            var context = db.CreateDataContext<EFDataContext>();
-            var readContext = db.CreateDataContext<EFDataContext>();
-            var sut = new PatientAppService(new EFPatientRepository(context), new EFUnitOfWork(context));
+            var dto = AddPatientDtoFactory.Create();
 
-            var dto = new AddPatientDto()
-            {
-                FirstName = "dummy-first-name",
-                LastName = "dummy-Last-name",
-                PhonNumber = "123456",
-                NationCode = "54321",
-            };
+            await _sut.Add(dto);
 
-            await sut.Add(dto);
-
-            var actual = readContext.Patients.Single();
+            var actual = _readContext.Patients.Single();
             actual.FirstName.Should().Be(dto.FirstName);
             actual.LastName.Should().Be(dto.LastName);
             actual.PhoneNumber.Should().Be(dto.PhonNumber);
@@ -49,27 +50,13 @@ namespace DoctorAppointment.Services.Unit.Tests
         [Fact]
         public async Task Add_throw_exception_patient_properly_there_is_a_national_code_patient()
         {
-            var db = new EFInMemoryDatabase();
-            var Context = db.CreateDataContext<EFDataContext>();
-            var patient = new Patient()
-            {
-                FirstName = "dummy-first-name",
-                LastName = "dummy-Last-name",
-                PhoneNumber = "123456",
-                NationCode = "54321",
-            };
-            Context.Save(patient);
-            var dto = new AddPatientDto()
-            {
-                FirstName = "dummy-first-name",
-                LastName = "dummy-Last-name",
-                PhonNumber = "123456",
-                NationCode = "54321",
-            };
 
-            var sut = new PatientAppService(new EFPatientRepository(Context), new EFUnitOfWork(Context));
+            var patient = new PatientBuilder().Build();
+            _context.Save(patient);
+            var dto = AddPatientDtoFactory.Create(patient.NationCode);
 
-            var actual = () => sut.Add(dto);
+
+            var actual = () => _sut.Add(dto);
 
 
 
@@ -79,29 +66,16 @@ namespace DoctorAppointment.Services.Unit.Tests
         [Fact]
         public async Task Update_updates_patient_properly()
         {
-            var db = new EFInMemoryDatabase();
-            var context = db.CreateDataContext<EFDataContext>();
-            var readContext = db.CreateDataContext<EFDataContext>();
-            var patient = new Patient()
-            {
-                FirstName = "dummy-first-name",
-                LastName = "dummy-Last-name",
-                PhoneNumber = "123456",
-                NationCode = "54321",
-            };
-            context.Save(patient);
-            var sut = new PatientAppService(new EFPatientRepository(context), new EFUnitOfWork(context));
-            var dto = new UpdatePatientDto()
-            {
-                FirstName = "update_dummy-first-name",
-                LastName = "update_dummy-Last-name",
-                PhonNumber = "update_123456",
-                NationCode = "update_54321",
-            };
 
-            await sut.Update(patient.Id, dto);
+            var patient = new PatientBuilder().Build();
+            _context.Save(patient);
 
-            var actual = readContext.Patients.First(_ => _.Id == patient.Id);
+            var dto = UpdatePatientDtoFactory.Create();
+
+
+            await _sut.Update(patient.Id, dto);
+
+            var actual = _readContext.Patients.First(_ => _.Id == patient.Id);
             actual.FirstName.Should().Be(dto.FirstName);
             actual.LastName.Should().Be(dto.LastName);
             actual.PhoneNumber.Should().Be(dto.PhonNumber);
@@ -111,21 +85,11 @@ namespace DoctorAppointment.Services.Unit.Tests
         [Fact]
         public async Task Update_throw_exception_patient_properly_if_patient_is_id_null()
         {
-            var db = new EFInMemoryDatabase();
-            var context = db.CreateDataContext<EFDataContext>();
             var dummyId = 1;
-            var sut = new PatientAppService(new EFPatientRepository(context), new EFUnitOfWork(context));
-
-            var dto = new UpdatePatientDto()
-            {
-                FirstName = "update_dummy-first-name",
-                LastName = "update_dummy-Last-name",
-                PhonNumber = "update_123456",
-                NationCode = "update_54321",
-            };
+            var dto = UpdatePatientDtoFactory.Create();
 
 
-            var action = () => sut.Update(dummyId, dto);
+            var action = () => _sut.Update(dummyId, dto);
 
             await action.Should().ThrowExactlyAsync<ThrowExceptionPatientProperlyIfPatientIsIdNull>();
         }
@@ -133,27 +97,15 @@ namespace DoctorAppointment.Services.Unit.Tests
         [Fact]
         public async Task Remove_removes_patient_properly()
         {
-            var db = new EFInMemoryDatabase();
-            var context = db.CreateDataContext<EFDataContext>();
-            var readContext = db.CreateDataContext<EFDataContext>();
-            var patient = new Patient()
-            {
-                FirstName = "first-name",
-                LastName = "last-name",
-                PhoneNumber = "123456",
-                NationCode = "54321",
-            };
-            context.Save(patient);
-            var sut = new PatientAppService(new EFPatientRepository(context), new EFUnitOfWork(context));
+           var patient = new PatientBuilder().Build();
+           _context.Save(patient);
+            
 
+             await _sut.Remove(patient.Id);
 
-            await sut.Remove(patient.Id);
+            var actual = await _readContext.Patients.FirstOrDefaultAsync(_ => _.Id == patient.Id);
 
-
-
-            var actual=readContext.Patients.FirstOrDefaultAsync(_=>_.Id==patient.Id);
-
-            actual.Result.Should().BeNull();    
+            actual.Should().BeNull();
 
 
 
@@ -161,55 +113,31 @@ namespace DoctorAppointment.Services.Unit.Tests
         [Fact]
         public async Task Remove_throw_exception_patient_properly_if_patient_is_id_null()
         {
-            var db = new EFInMemoryDatabase();
-            var context= db.CreateDataContext<EFDataContext>();
+           
             var dummyid = 1;
-            var patient = new Patient()
-            {
-                FirstName = "first-name",
-                LastName = "last-name",
-                PhoneNumber = "123456",
-                NationCode = "54321",
-            };
-            var sut = new PatientAppService(new EFPatientRepository(context), new EFUnitOfWork(context));
+            var patient = new PatientBuilder().Build();
 
-            var action=()=>sut.Remove(dummyid);
+            var action = () => _sut.Remove(dummyid);
 
             await action.Should().ThrowExactlyAsync<ThrowExceptionPatientProperlyIfPatientIsIdNull>();
-           
+
 
         }
 
         [Fact]
         public async Task Get_gets_all_for_correct_data_patien_properly()
         {
-            var db = new EFInMemoryDatabase();
-            var context = db.CreateDataContext<EFDataContext>();
-            var readcontext = db.CreateDataContext<EFDataContext>();
-            var patien = new Patient()
-            {
-                Id = 1,
-                FirstName = "get-dummy-first-name",
-                LastName = "get-dummy-last-name",
-                PhoneNumber = "12345",
-                NationCode = "54321"
-            };
-            context.Save(patien);
+       
+            var patien = new PatientBuilder().Build();
+      
+           _context.Save(patien);
 
-            var sut = new PatientAppService(new EFPatientRepository(context), new EFUnitOfWork(context));
 
-            var dto = new GetPatientDto()
-            {
-                Id = 1,
-                FirstName = "get-dummy-first-name",
-                LastName = "get-dummy-last-name",
-                PhoneNumber= "12345",
-                NationCode = "54321",
+            var dto =GetPatientDtoFactory.Create();
+           
+            await _sut.GetAll();
 
-            };
-            await sut.GetAll();
-
-            var actual = readcontext.Patients.Single();
+            var actual = _readContext.Patients.Single();
             actual.Id.Should().Be(dto.Id);
             actual.FirstName.Should().Be(dto.FirstName);
             actual.LastName.Should().Be(dto.LastName);

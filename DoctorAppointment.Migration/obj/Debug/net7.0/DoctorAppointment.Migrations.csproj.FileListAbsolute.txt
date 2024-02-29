@@ -82,3 +82,4 @@ C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointmen
 C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Migration\bin\Debug\net7.0\Microsoft.Extensions.FileProviders.Abstractions.dll
 C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Migration\bin\Debug\net7.0\Microsoft.Extensions.FileProviders.Physical.dll
 C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Migration\bin\Debug\net7.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Migration\bin\Debug\net7.0\appsettings.json

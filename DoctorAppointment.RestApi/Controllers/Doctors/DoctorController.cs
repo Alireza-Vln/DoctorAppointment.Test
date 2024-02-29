@@ -28,7 +28,7 @@ namespace DoctorAppointment.RestApi.Controllers.Doctors
         {
           return await _service.GetAll();
         }
-        [HttpGet]
+        [HttpGet("Count")]
         public async Task<int> GetAllCount()
         {
            return await _service.GetAllCount();

@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 
 namespace DoctorAppointment.Migrations
 {
+    [Migration(202402271349)]
    public class _202402271349_CreateDoctor_Table : Migration
     {
         public override void Up()
         {
             Create.Table("Doctors")
                  .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                 .WithColumn("FirstName").AsString().NotNullable()
-                 .WithColumn("LastName").AsString().NotNullable()
-                 .WithColumn("Field").AsString().NotNullable()
-                 .WithColumn("NationCode").AsString().NotNullable();
+                 .WithColumn("FirstName").AsString(50).NotNullable()
+                 .WithColumn("LastName").AsString(50).NotNullable()
+                 .WithColumn("Field").AsString(30).NotNullable()
+                 .WithColumn("NationCode").AsString(11).NotNullable();
                 
         }
         public override void Down()
