@@ -432,7 +432,17 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Contracts\\DoctorAppointment.Contracts.csproj": {
+                "projectPath": "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Contracts\\DoctorAppointment.Contracts.csproj"
+              },
+              "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Persistence.EF\\DoctorAppointment.Persistence.EF.csproj": {
+                "projectPath": "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Persistence.EF\\DoctorAppointment.Persistence.EF.csproj"
+              },
+              "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Services\\DoctorAppointment.Services.csproj": {
+                "projectPath": "C:\\Users\\welldone\\Desktop\\Alireza\\Docter.Test\\DoctorAppointment\\DoctorAppointment.Services\\DoctorAppointment.Services.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

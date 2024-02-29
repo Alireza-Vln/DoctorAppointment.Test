@@ -76,3 +76,9 @@ C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointmen
 C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Migration\obj\Debug\net7.0\DoctorAppointment.Migrations.pdb
 C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Migration\obj\Debug\net7.0\DoctorAppointment.Migrations.genruntimeconfig.cache
 C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Migration\obj\Debug\net7.0\ref\DoctorAppointment.Migrations.dll
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Migration\bin\Debug\net7.0\Microsoft.Extensions.Configuration.dll
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Migration\bin\Debug\net7.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Migration\bin\Debug\net7.0\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Migration\bin\Debug\net7.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Migration\bin\Debug\net7.0\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\welldone\Desktop\Alireza\Docter.Test\DoctorAppointment\DoctorAppointment.Migration\bin\Debug\net7.0\Microsoft.Extensions.FileSystemGlobbing.dll

@@ -4,8 +4,10 @@ using DoctorAppointment.Persistance.EF;
 using DoctorAppointment.Persistance.EF.Doctors;
 using DoctorAppointment.Persistence.EF;
 using DoctorAppointment.Services.Doctors;
+using DoctorAppointment.Services.Doctors.Contracts;
 using DoctorAppointment.Services.Doctors.Contracts.Dto;
 using DoctorAppointment.Services.Doctors.Exceptions;
+using DoctorAppointment.Test.Tools.Doctors;
 using DoctorAppointment.Test.Tools.Infrastructure.DatabaseConfig.Unit;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
@@ -16,27 +18,27 @@ namespace DoctorAppointment.Services.Unit.Tests;
 
 public class DoctorServiceTests
 {
+    private readonly EFDataContext _context;
+    private readonly EFDataContext _readContext;
+    private readonly DoctorService _sut;
+
+    public DoctorServiceTests()
+    {
+        var db = new EFInMemoryDatabase();
+         _context = db.CreateDataContext<EFDataContext>();
+        _readContext = db.CreateDataContext<EFDataContext>();
+        _sut = DoctorServiceFactory.Create(_context);
+    }
+
     [Fact]
     public async Task Add_adds_a_new_doctor_properly()
     {
-        //arrange
-        var dto = new AddDoctorDto
-        {
-            FirstName = "dummy-first-name",
-            LastName = "dummy-last-name",
-            Field = "heart",
-            NationCode = "22",
-        };
-        var db = new EFInMemoryDatabase();
-        var context = db.CreateDataContext<EFDataContext>();
-        var readContext = db.CreateDataContext<EFDataContext>();
-        var sut = new DoctorAppService(new EFDoctorRepository(context), new EFUnitOfWork(context));
 
-        //act
-        await sut.Add(dto);
+        var dto = AddDoctorDtoFactory.Create();
+      
+        await _sut.Add(dto);
 
-        //assert
-        var actual = readContext.Doctors.Single();
+        var actual = _readContext.Doctors.Single();
         actual.FirstName.Should().Be(dto.FirstName);
         actual.LastName.Should().Be(dto.LastName);
         actual.Field.Should().Be(dto.Field);
@@ -46,30 +48,16 @@ public class DoctorServiceTests
     [Fact]
     public async Task Add_throw_doctor_properly_There_is_a_national_doctor_code()
     {
-        var db = new EFInMemoryDatabase();
-        var context = db.CreateDataContext<EFDataContext>();
+       
+
+        var docter = new DoctorBuilder().Build();
+     
+        _context.Save(docter);
+
+        var dto = AddDoctorDtoFactory.Create();
 
 
-        var docter = new Doctor
-        {
-            FirstName = "dummy-first-name",
-            LastName = "dummy-last-name",
-            Field = "heart",
-            NationCode = "22",
-        };
-        context.Save(docter);
-        var sut = new DoctorAppService(new EFDoctorRepository(context), new EFUnitOfWork(context));
-        var dto = new AddDoctorDto
-        {
-            FirstName = "dummy2-first-name",
-            LastName = "dummy2-last-name",
-            Field = "heart",
-            NationCode = "22",
-        };
-
-
-
-       var action =()=>sut.Add(dto);
+       var action =()=>_sut.Add(dto);
 
        
 

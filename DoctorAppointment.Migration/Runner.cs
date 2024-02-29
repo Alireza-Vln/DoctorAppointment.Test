@@ -1,5 +1,5 @@
-﻿
-using FluentMigrator.Runner;
+﻿using FluentMigrator.Runner;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 class Runner
@@ -20,15 +20,20 @@ class Runner
     /// </summary>
     private static ServiceProvider CreateServices()
     {
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
         return new ServiceCollection()
             // Add common FluentMigrator services
             .AddFluentMigratorCore()
             .ConfigureRunner(rb => rb
                 // Add SQLite support to FluentMigrator
                 .AddSqlServer()
-                
                 // Set the connection string
-                .WithGlobalConnectionString("Server=.;Database=HospitalDB;Trusted_Connection=True;TrustServerCertificate=True")
+                .WithGlobalConnectionString(connectionString)
                 // Define the assembly containing the migrations
                 .ScanIn(typeof(Runner).Assembly).For.Migrations())
             // Enable logging to console in the FluentMigrator way
@@ -46,6 +51,7 @@ class Runner
         var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
         // Execute the migrations
+        //runner.MigrateDown(0);
         runner.MigrateUp();
     }
 }

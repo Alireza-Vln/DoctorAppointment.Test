@@ -4,6 +4,7 @@ using DoctorAppointment.Persistance.EF.Doctors;
 using DoctorAppointment.Persistence.EF;
 using DoctorAppointment.Services.Doctors;
 using DoctorAppointment.Services.Doctors.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<EFDataContext>();
+builder.Configuration.AddJsonFile("appsettings.json");
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<EFDataContext>(
+    options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<UnitOfWork , EFUnitOfWork>();
 builder.Services.AddScoped<DoctorService,DoctorAppService>();
 builder.Services.AddScoped<DoctorRepository,EFDoctorRepository>();
