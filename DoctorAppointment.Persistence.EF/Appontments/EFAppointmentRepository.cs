@@ -37,5 +37,10 @@ namespace DoctorAppointment.Services.Unit.Tests
             return _context.Doctors.FirstOrDefault(_ => _.Id == doctorId)
                 .AppointmentList.Where(_=>_.AppointmentTime==dateDoctor).ToList();
         }
+
+        public async Task<List<Appointment>> GetAll()
+        {
+           return  _context.Appointments.ToList();
+        }
     }
 }

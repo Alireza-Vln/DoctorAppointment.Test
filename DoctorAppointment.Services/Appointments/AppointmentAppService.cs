@@ -45,5 +45,10 @@ namespace DoctorAppointment.Services.Unit.Tests
           _repository.Add( appointment);
             await _unitOfWork.Complete();
         }
+
+        public async Task<List<Appointment>> GetAll()
+        {
+          return await _repository.GetAll();
+        }
     }
 }

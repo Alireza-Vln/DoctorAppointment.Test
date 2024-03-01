@@ -3,5 +3,6 @@
     public interface AppointmentService
     {
         Task Add(AddAppontmentDto dto);
+        Task<List<Appointment>> GetAll();
     }
 }

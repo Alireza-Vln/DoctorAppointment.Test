@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Apponments\Builders\" />
       <Folder Include="Infrastructure\DatabaseConfig\" />
     </ItemGroup>
 

@@ -9,7 +9,6 @@ namespace DoctorAppointment.Services.Unit.Tests
         Patient? FindPatient (int PatientId);
         List<Appointment> FindDoctorAppointment
             (int doctorId, DateTime dateDoctor);
-
-
+        Task<List<Appointment>> GetAll();
     }
 }

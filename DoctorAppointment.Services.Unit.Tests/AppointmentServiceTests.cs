@@ -115,12 +115,31 @@ namespace DoctorAppointment.Services.Unit.Tests
             var action3 =   _sut.Add(dto3);
             var action4 =   _sut.Add(dto4);
             var action5 =   _sut.Add(dto5);
-           // var action6 =  () =>  _sut.Add(dto6);
-
+          
             var actual =()=> _sut.Add(dto6);
             actual.Should().ThrowExactlyAsync<ThrowAddsAppointmentDoctorWithThePatientIfAppointmentCountBiggerThan5Exception>();
-
         }
+        [Fact]
+        public void get_gets_appointment_doctor_with_the_patient()
+        {
+              var doctor=new DoctorBuilder().Build();
+            var patient=new PatientBuilder().Build();
+            var appointment=new AppointmentBuilder().Build();
+            _context.Save(doctor);
+            _context.Save(patient);
+            _context.Save(appointment);
+            var dto = GetAppointmentDtoFactory.Create();
+          
+             _sut.GetAll();
+
+            var actual = _readContext.Appointments.Single();
+            actual.Id.Should().Be(dto.Id);
+            actual.DoctorId.Should().Be(dto.DoctorId);
+            actual.PatientId.Should().Be(dto.PatientId);
+            actual.AppointmentTime.Should().Be(dto.AppointmentTime);
+        }
+
+
 
     }
 }
