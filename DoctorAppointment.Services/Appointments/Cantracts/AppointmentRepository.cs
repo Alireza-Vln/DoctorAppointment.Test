@@ -1,0 +1,11 @@
+﻿using DoctorAppointment.Entities.Doctors;
+
+namespace DoctorAppointment.Services.Unit.Tests
+{
+    public interface AppointmentRepository
+    {
+        void Add( Appointment appointment);
+        Doctor? FindDoctor(int DoctorId);
+        Patient? FindPatient (int PatientId);
+    }
+}
