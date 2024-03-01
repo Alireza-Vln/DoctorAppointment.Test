@@ -6,6 +6,6 @@
 
         public int DoctorId { get; set; }
         public int PatientId { get; set; }
-        public DateTime AppontmentTime { get; set; }
+        public DateTime AppointmentTime { get; set; }
     }
 }

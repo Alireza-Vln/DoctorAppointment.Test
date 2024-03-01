@@ -25,9 +25,17 @@ namespace DoctorAppointment.Services.Unit.Tests
             return _context.Doctors.FirstOrDefault(_ => _.Id == DoctorId);
         }
 
+
         public Patient? FindPatient(int PatientId)
         {
-            return _context.Patients.FirstOrDefault(_=>_.Id == PatientId);
+            return _context.Patients.FirstOrDefault(_ => _.Id == PatientId);
+        }
+        public List<Appointment> FindDoctorAppointment
+            (int doctorId,DateTime dateDoctor)
+        {
+
+            return _context.Doctors.FirstOrDefault(_ => _.Id == doctorId)
+                .AppointmentList.Where(_=>_.AppointmentTime==dateDoctor).ToList();
         }
     }
 }

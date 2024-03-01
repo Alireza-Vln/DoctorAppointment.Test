@@ -19,6 +19,8 @@ namespace DoctorAppointment.Test.Tools.Doctors.Builders
                 LastName = "dummy-last-name",
                 Field = "heart",
                 NationCode = "22",
+                
+               
             };
         }
 

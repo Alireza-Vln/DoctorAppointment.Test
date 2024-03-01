@@ -7,5 +7,9 @@ namespace DoctorAppointment.Services.Unit.Tests
         void Add( Appointment appointment);
         Doctor? FindDoctor(int DoctorId);
         Patient? FindPatient (int PatientId);
+        List<Appointment> FindDoctorAppointment
+            (int doctorId, DateTime dateDoctor);
+
+
     }
 }

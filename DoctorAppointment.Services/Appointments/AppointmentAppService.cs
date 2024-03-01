@@ -16,12 +16,33 @@ namespace DoctorAppointment.Services.Unit.Tests
         {
              var doctor= _repository.FindDoctor(dto.DoctorId);
             var patient= _repository.FindPatient(dto.PatientId);
+         
+            if (doctor == null)
+            {
+                throw new ThrowAddsAppointmentDoctorWithThePatientIfDoctorIsNullException();
+            }
+            if (patient== null)
+            {
+                throw new ThrowAddsAppointmentDoctorWithThePatientIfPatientIsNullException();
+            }
+            if(dto.AppointmentTime<DateTime.UtcNow)
+            {
+                throw new ThrowAddsAppointmentDoctorWithThePatientIfDateTimeIsPassedException();
+            }
+          // // var doctorAppointmentInDay = doctor.AppointmentList.Where(_ => _.AppointmentTime == dto.AppointmentTime).ToList();
+          //var doc= _repository.FindDoctor(dto.DoctorId).AppointmentList.Where(_ => _.AppointmentTime == dto.AppointmentTime).ToList();
+
+
+            if (_repository.FindDoctorAppointment(doctor.Id,dto.AppointmentTime).Count > 5)
+            {
+                throw new ThrowAddsAppointmentDoctorWithThePatientIfAppointmentCountBiggerThan5Exception();
+            }
            
             var appointment = new Appointment()
             {
                 DoctorId = doctor.Id,
                 PatientId = patient.Id,
-                AppointmentTime = dto.AppontmentTime
+                AppointmentTime = dto.AppointmentTime
 
             };
           _repository.Add( appointment);
