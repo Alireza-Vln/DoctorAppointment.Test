@@ -29,10 +29,7 @@ namespace DoctorAppointment.Services.Unit.Tests
             {
                 throw new ThrowAddsAppointmentDoctorWithThePatientIfDateTimeIsPassedException();
             }
-          // // var doctorAppointmentInDay = doctor.AppointmentList.Where(_ => _.AppointmentTime == dto.AppointmentTime).ToList();
-          //var doc= _repository.FindDoctor(dto.DoctorId).AppointmentList.Where(_ => _.AppointmentTime == dto.AppointmentTime).ToList();
-
-
+      
             if (_repository.FindDoctorAppointment(doctor.Id,dto.AppointmentTime).Count > 5)
             {
                 throw new ThrowAddsAppointmentDoctorWithThePatientIfAppointmentCountBiggerThan5Exception();
