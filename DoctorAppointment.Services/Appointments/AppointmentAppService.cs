@@ -50,5 +50,16 @@ namespace DoctorAppointment.Services.Unit.Tests
         {
           return await _repository.GetAll();
         }
+
+        public async Task Remove(int id)
+        {
+            var appointment = _repository.FindAppointment(id);
+            if (appointment == null)
+            {
+                throw new ThrowRemoveAppointmentDoctorWithThePatientIfAppointmentIsNullException();
+            }
+            await _repository.Remove(appointment);
+            await _unitOfWork.Complete();
+        }
     }
 }

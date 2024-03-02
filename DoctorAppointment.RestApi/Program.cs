@@ -25,6 +25,8 @@ builder.Services.AddScoped<DoctorService,DoctorAppService>();
 builder.Services.AddScoped<DoctorRepository,EFDoctorRepository>();
 builder.Services.AddScoped<PatientService,PatientAppService>();
 builder.Services.AddScoped<PatientRepository,EFPatientRepository>();
+builder.Services.AddScoped<AppointmentService,AppointmentAppService>();
+builder.Services.AddScoped<AppointmentRepository,EFAppointmentRepository>();
 
 var app = builder.Build();
 

@@ -4,5 +4,6 @@
     {
         Task Add(AddAppontmentDto dto);
         Task<List<Appointment>> GetAll();
+        Task Remove(int id);
     }
 }

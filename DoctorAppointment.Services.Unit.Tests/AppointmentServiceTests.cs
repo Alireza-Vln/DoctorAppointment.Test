@@ -138,8 +138,38 @@ namespace DoctorAppointment.Services.Unit.Tests
             actual.PatientId.Should().Be(dto.PatientId);
             actual.AppointmentTime.Should().Be(dto.AppointmentTime);
         }
+        [Fact]
 
 
 
+        public void Remove_removes_appointment_doctor_with_the_patient()
+        {
+            var doctor = new DoctorBuilder().Build();
+            var patient = new PatientBuilder().Build();
+            var appointment = new AppointmentBuilder().Build();
+            _context.Save(doctor);
+            _context.Save(patient);
+            _context.Save(appointment);
+            
+            _sut.Remove(appointment.Id);
+
+            var actual = _readContext.Appointments.FirstOrDefault(_=>_.Id==appointment.Id);
+             actual.Should().BeNull();
+           
+        }
+        [Fact]
+        public void Throw_removes_appointment_doctor_with_the_patient_if_appointment_is_null_exception()
+        {
+            var doctor = new DoctorBuilder().Build();
+            var patient = new PatientBuilder().Build();
+            var appointment = new AppointmentBuilder().Build();
+            _context.Save(doctor);
+            _context.Save(patient);
+            _context.Save(appointment);
+            var actual=()=> _sut.Remove(appointment.Id);
+
+
+            actual.Should().ThrowExactlyAsync<ThrowRemoveAppointmentDoctorWithThePatientIfAppointmentIsNullException>();
+        }
     }
 }

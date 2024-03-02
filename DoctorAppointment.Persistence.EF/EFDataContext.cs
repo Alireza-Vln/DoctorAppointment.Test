@@ -21,11 +21,6 @@ public class EFDataContext : DbContext
     public DbSet<Patient> Patients { get; set; }
     public DbSet<Appointment> Appointments { get; set; }
 
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //{
-
-    //    optionsBuilder.UseSqlServer("Server=.;Database=HospitalDB;Trusted_Connection=True;TrustServerCertificate=True");
-    //}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

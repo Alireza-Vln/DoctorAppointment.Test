@@ -42,5 +42,15 @@ namespace DoctorAppointment.Services.Unit.Tests
         {
            return  _context.Appointments.ToList();
         }
+
+        public Appointment? FindAppointment(int id)
+        {
+            return _context.Appointments.FirstOrDefault(_ => _.Id == id);
+        }
+
+        public async Task Remove(Appointment appointment)
+        {
+             _context.Appointments.Remove(appointment);
+        }
     }
 }

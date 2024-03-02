@@ -50,18 +50,11 @@ public class DoctorServiceTests
     [Fact]
     public async Task Add_throw_doctor_properly_There_is_a_national_doctor_code()
     {
-       
-
         var doctor = new DoctorBuilder().Build();
-     
         _context.Save(doctor);
-
         var dto = AddDoctorDtoFactory.Create(doctor.NationCode);
 
-
        var action =()=>_sut.Add(dto);
-
-       
 
         await action.Should().ThrowExactlyAsync<AddThrowDoctorProperlyThereIsANationalCodeDoctor>();
 
@@ -75,7 +68,6 @@ public class DoctorServiceTests
 
         var doctor = new DoctorBuilder().Build();
         _context.Save(doctor);
-
         var updateDto = UpdateDoctorDtoFactory.Creat();
    
         
@@ -93,30 +85,20 @@ public class DoctorServiceTests
     [Fact]
     public async Task Update_throw_doctor_properly_if_doctor_is_id_null()
     {
-
-
         var dummyid = 1;
         var updateDto = UpdateDoctorDtoFactory.Creat();
 
-     
       var action = ()=> _sut.Update(dummyid, updateDto);
 
-  
-
         await action.Should().ThrowExactlyAsync<UpdateThrowdoctorProperlyIfDocterIsIdNull>();
-
     }
     [Fact]
     public async Task Remove_removes_doctor_properly()
     {
-
         var doctor = new DoctorBuilder().Build();
-
         _context.Save(doctor);
-       
-        
+           
         await _sut.Remove(doctor.Id);
-
 
         var actual = await _readContext.Doctors.FirstOrDefaultAsync(_ => _.Id == doctor.Id);
         actual.Should().BeNull();    
@@ -125,15 +107,10 @@ public class DoctorServiceTests
     [Fact]
     public async Task Remove_throw_doctor_properly_if_docter_is_id_null()
     {
-   
         var dummyDoctorId = 1;
         var doctor = new DoctorBuilder().Build();
-     
-      
 
            var action=()=>_sut.Remove(dummyDoctorId);
-
-
 
        await action.Should().ThrowExactlyAsync<RemoveThrowDoctorProperlyIfDocterIsIdNull>();
 
@@ -145,14 +122,9 @@ public class DoctorServiceTests
     {
        var doctor=new DoctorBuilder().Build();
         _context.Save(doctor);
- 
-        
-
         var dto = GetDoctorDtoFactory.Create();
   
-
         await _sut.GetAll();
-
 
         var actual=_readContext.Doctors.Single();
         actual.Id.Should().Be(dto.Id);
@@ -166,14 +138,10 @@ public class DoctorServiceTests
     public async Task Get_gets_all_for_count_data_docter_properly()
     {
         var doctor = new DoctorBuilder().Build();
-
        _context.Save(doctor);
-
-
-
         var dto = GetDoctorDtoFactory.Create();
-        await _sut.GetAll();
 
+        await _sut.GetAll();
 
       var actual = _readContext.Doctors.ToList();
       actual.Count.Should().Be(1);  
