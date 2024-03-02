@@ -160,16 +160,41 @@ namespace DoctorAppointment.Services.Unit.Tests
         [Fact]
         public void Throw_removes_appointment_doctor_with_the_patient_if_appointment_is_null_exception()
         {
+            var dummyId = 1;
+           
+            var actual=()=> _sut.Remove(dummyId);
+
+
+            actual.Should().ThrowExactlyAsync<ThrowRemoveAppointmentDoctorWithThePatientIfAppointmentIsNullException>();
+        }
+        [Fact]
+        public async Task Update_update_appointment_time_properly()
+        {
+            var dummyTime = new DateTime(2024, 6, 25);
             var doctor = new DoctorBuilder().Build();
             var patient = new PatientBuilder().Build();
             var appointment = new AppointmentBuilder().Build();
             _context.Save(doctor);
             _context.Save(patient);
             _context.Save(appointment);
-            var actual=()=> _sut.Remove(appointment.Id);
+            var dto = UpdateApoointmentDtoFactory.Create();
+
+            await _sut.Update(appointment.Id,dto);
+
+            var actual = _readContext.Appointments.FirstOrDefault(_ => _.Id == appointment.Id);
+
+            actual.AppointmentTime.Should().Be(dto.AppointmentTime);
+
+        }
+        [Fact]
+        public async Task Throw_update_appointment_doctor_with_the_patient_if_appointment_is_nul_exception()
+        {
+            var dummyId = 1;
+            var dto = UpdateApoointmentDtoFactory.Create();
+            var actual = () => _sut.Update(dummyId,dto);
 
 
-            actual.Should().ThrowExactlyAsync<ThrowRemoveAppointmentDoctorWithThePatientIfAppointmentIsNullException>();
+           await actual.Should().ThrowExactlyAsync<ThrowUpdateAppointmentDoctorWithThePatientIfAppointmentIsNullException>();
         }
     }
 }
