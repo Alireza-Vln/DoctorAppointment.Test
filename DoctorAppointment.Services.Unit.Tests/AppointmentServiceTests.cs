@@ -182,7 +182,6 @@ namespace DoctorAppointment.Services.Unit.Tests
             await _sut.Update(appointment.Id,dto);
 
             var actual = _readContext.Appointments.FirstOrDefault(_ => _.Id == appointment.Id);
-
             actual.AppointmentTime.Should().Be(dto.AppointmentTime);
 
         }
@@ -191,8 +190,8 @@ namespace DoctorAppointment.Services.Unit.Tests
         {
             var dummyId = 1;
             var dto = UpdateApoointmentDtoFactory.Create();
-            var actual = () => _sut.Update(dummyId,dto);
 
+            var actual = () => _sut.Update(dummyId,dto);
 
            await actual.Should().ThrowExactlyAsync<ThrowUpdateAppointmentDoctorWithThePatientIfAppointmentIsNullException>();
         }

@@ -90,7 +90,7 @@ public class DoctorServiceTests
 
       var action = ()=> _sut.Update(dummyid, updateDto);
 
-        await action.Should().ThrowExactlyAsync<UpdateThrowdoctorProperlyIfDocterIsIdNull>();
+        await action.Should().ThrowExactlyAsync<UpdateThrowDoctorProperlyIfDoctorIsIdNullException>();
     }
     [Fact]
     public async Task Remove_removes_doctor_properly()
@@ -112,7 +112,7 @@ public class DoctorServiceTests
 
            var action=()=>_sut.Remove(dummyDoctorId);
 
-       await action.Should().ThrowExactlyAsync<RemoveThrowDoctorProperlyIfDocterIsIdNull>();
+       await action.Should().ThrowExactlyAsync<RemoveThrowDoctorProperlyIfDoctorIsIdNullException>();
 
         
     }

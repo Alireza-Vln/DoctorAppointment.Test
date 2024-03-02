@@ -27,7 +27,7 @@ namespace DoctorAppointment.RestApi.Controllers.Appointments
         {
             await _service.Remove(id);
         }
-        [HttpDelete]
+        [HttpPatch]
         public async Task Update([FromQuery] int id,UpdateAppointmentDto dto)
         {
             await _service.Update(id, dto);

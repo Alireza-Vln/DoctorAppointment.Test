@@ -57,7 +57,7 @@ public class DoctorAppService : DoctorService
        var docter= await _repository.FindById(id);
         if(docter == null)
         {
-        throw new RemoveThrowDoctorProperlyIfDocterIsIdNull();
+        throw new RemoveThrowDoctorProperlyIfDoctorIsIdNullException();
         
         }
         _repository.Remove(docter);
@@ -69,7 +69,7 @@ public class DoctorAppService : DoctorService
         var doctor = await _repository.FindById(id);
         if (doctor == null)
         {
-            throw new UpdateThrowdoctorProperlyIfDocterIsIdNull();
+            throw new UpdateThrowDoctorProperlyIfDoctorIsIdNullException();
         }
         doctor.FirstName = dto.FirstName;
         doctor.LastName = dto.LastName;
